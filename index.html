@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Algorithms 101 : Javascript</title>
+</head>
+<style>
+	h3 {
+
+		font-family: 'Arial','sans-serif' ;
+
+	}
+
+	#page-title{
+		margin : 30px;
+	}
+</style>
+<body>
+
+	<h3 id="page-title">Revisiting Algorithms w/ JS</h3>
+
+	<em>Open Devtools in your browser. and try this one out </em>
+
+	<ol>
+		<p>Algorithms in this file : </p>
+		<p>Also included are the some descriptions of</p>
+
+		<li><a href="./fizz_buzz.html">Fizz Buzz Algorithm</a></li>
+		<li><a href="./harmless_note.html">Harmless Note Algorithm</a></li>
+		<li><a href="./palindrome.html">Is Palindrome</a></li>
+		<li><a href="./caesar_cipher.html">Caesar Cipher</a></li>
+		<li><a href="./reverse_words.html">Reverse Words</a></li>
+		<li><a href="./reverse_array">Reverse Array in Place</a></li>
+		<li><a href="./mean_median_mode.html">Mean Median Mode</a></li>
+		<li><a href="./two_sum.html">Two Sum</a></li>
+		<li><a href="./binary_search.html">Binary Search</a></li>
+		<li><a href="./fibonacci.html">Fibonacci</a></li>
+		<li><a href="./memoized_fibonacci.html">Memoized Fibonacci</a></li>
+		<li><a href="./sieve_of_erastothenes.html">Sieve of Erastothenes</a></li>
+		<li><a href="./bubble_sort.html">Bubble Sort</a></li>
+		<li><a href="./merge_sort.html">Merge Sort</a></li>
+
+
+
+	</ol>
+	
+	<script>
+
+		function fizzBuzz(num){
+
+			for (i = 1 ; i <= num ; i++){
+
+				if ( i % 3 == 0 ){
+					console.log("fizz");
+				}
+				else if ( i % 5 == 0) {
+					console.log("buzz"); 
+				}
+				else if ( i % 3 == 0 && i % 5 == 0) {
+					console.log("fizzbuzz");
+				}
+				else { 
+					console.log(i);
+				}
+			}
+		}		
+
+/**
+INTRO TO BIG O NOTATION..
+
+		Big O is a notation used to classify how scalable an algorithm or a function is.. 
+		> it allows us  to estimate the worst case runtime or how long it takes an algorithm to complete..based on the input size. 
+
+		Informs us 
+
+		Big O notation -> How performant a function or algorithm is..
+		*/
+
+		/*** EXAMPLES in below functions ***/
+
+// 1. Constant Runtime
+// BIG O Notation : O(1)
+// What is the BIG O notation for this ? 
+// means : As the input size  increases the number of operations we perform never changed. It's called Constant Runtime 
+
+function log(array){
+	console.log(array[0]);
+	console.log(array[1]) ;
+
+
+	log([1,2,3,4]);
+	log([1,2,3,4,5,6]);
+
+} 
+
+// 2. Linear Runtime 
+// Because the runtime is proportionate to the input..
+// Big O NOTATION : O(n)
+
+function logAll(array){
+	for ( var i = 0 ; i < array.length  ; i ++){
+		console.log(array[i]);
+	}
+}
+
+logAll([1,2,3,4,5]);
+logAll([1,2,3,4,5,6]);
+logAll([1,2,3,4,5,6,7]);
+
+
+
+/**
+
+Exponential Runtime 
+
+BIG O Notation :  O (n^2)
+
+
+parameters : array
+
+iterates the whole array 
+if we have an array of 3 elements we have 9 elements.
+
+
+	**/
+
+
+function addAndLog(array){
+	for (var i = 0; i < array.length; i++) {
+		for (var j = 0; j < array.length; j++) {
+			console.log(array[i] + array[j]);
+		}
+	}
+}
+
+addAndLog([1,2,3,4,5]); //25 pairs logged out
+addAndLog([1,2,3,4,5,6]); // 36 pairs logged out
+addAndLog([1,2,3,4,5,6,7]);//49 pairs loggd out..
+
+
+
+/***********      
+Logarithmic Runtime . 
+Big O : O (log n)
+An example is binary search..
+
+@params :  One is list/array, Next is a single value which is what we're looking for within the array; 
+
+Binary search has logarithmic runtime because with every operation 
+
+Even if we have a huge input
+
+
+Real life example :  Is when you're using a dictionary.
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+When you're looking for a word house
+
+1. You open the dictionary then you're in the letter P then you discard the next pages. 
+2. Then you open to the previous pages . You're inthe letter D right now you discard the previous pages.
+3. Then you're in F now.
+
+
+We perform 3 operations
+
+
+*/
+function binarySearch(array, key){
+	var low = 0  ; 
+	var high = array.length	-1 ; 
+	var mid ; 
+	var element ; 
+
+
+// while 0 
+	while ( low<=high){ 
+		mid = Math.floor((low + high) / 2, 10);
+		element = array[mid] ; 
+		if ( element < key) {
+			low = mid + 1 ;
+		} else if ( element > key){ 
+			high - mid -1 ; 
+		}
+		else { 
+			return mid; 
+		}
+	}
+
+	return -1 ; 
+
+}
+
+
+
+/*****
+
+*/
+
+function harmlessRansomNote(noteText, magazineText){
+
+	var noteArray = noteText.split(' ');
+	
+	var magazineArr = magazineText.split(' '); 
+
+	var magazineObj = {} ; 
+
+
+
+	magazineArr.foreach(word => {
+		if (!magazineObj[word]) magazineObj[word] = 0 ; 
+		magazineObj[word]++ ; 
+	});
+
+
+
+	noteArr.foreach(word => {
+		console.log("")
+
+
+	});
+
+
+}  
+
+fizzBuzz(30);
+
+
+// Not yet finished.
+// harmlessRansomNote("The quick ") ;
+
+function isPalindrome(string){
+	string = string.toLowerCase() ; 
+
+	var charArray = string.split('');
+
+	var validCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(" ");
+
+	var lettersArr = [];
+
+
+	lettersArr.forEach(char => {
+		if (validCharacters.indexOf())
+	});
+
+}
+
+isPalindrome("Madam I'm Adam");
+
+
+
+
+
+</script>
+
+</body>
+</html> 
